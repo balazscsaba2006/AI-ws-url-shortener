@@ -155,7 +155,7 @@ Pick one or more if you finish early:
 
 You'll clone a pre-configured Laravel project with:
 
-- Laravel 12 + PHP 8.4 + SQLite
+- Laravel 13 + PHP 8.4 + SQLite
 - `composer setup` — one command to get running
 - `composer dev` — concurrent dev server + queue + vite
 - Pre-commit hooks (Pint + PHPStan + Pest)
