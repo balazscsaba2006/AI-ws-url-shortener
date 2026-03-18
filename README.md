@@ -36,6 +36,21 @@ cd AI-ws-url-shortener
 make up            # builds & starts at http://localhost:8000
 ```
 
+## Pre-commit Hooks
+
+The project uses [pre-commit](https://pre-commit.com/) to run Pint, PHPStan, and Pest before each commit.
+
+```bash
+# Install pre-commit (once)
+brew install pre-commit    # macOS
+pip install pre-commit     # or via pip
+
+# Activate hooks in this repo
+pre-commit install
+```
+
+After this, every `git commit` will automatically lint, analyse, and test your code.
+
 ## Development Commands
 
 ```bash
