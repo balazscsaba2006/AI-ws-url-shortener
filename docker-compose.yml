@@ -1,0 +1,21 @@
+services:
+  app:
+    build: .
+    ports:
+      - "${APP_PORT:-8000}:8000"
+      - "${VITE_PORT:-5174}:5173"
+    volumes:
+      - .:/app
+      - /app/vendor
+      - /app/node_modules
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    command: >-
+      bash -c "
+      php -r \"file_exists('.env') || copy('.env.example', '.env');\" &&
+      php artisan key:generate --no-interaction 2>/dev/null;
+      touch database/database.sqlite &&
+      php artisan migrate --force &&
+      bunx concurrently -c '#93c5fd,#c4b5fd,#fb7185' 'php artisan serve --host=0.0.0.0' 'php artisan queue:listen --tries=1 --timeout=0' 'bun run dev -- --host=0.0.0.0' --names=server,queue,vite --kill-others
+      "
