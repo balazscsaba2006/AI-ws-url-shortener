@@ -1,4 +1,4 @@
-FROM php:8.5-cli
+FROM php:8.4-cli
 
 # System deps
 RUN apt-get update && apt-get install -y \
@@ -12,6 +12,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Bun
 RUN curl -fsSL https://bun.sh/install | bash
 ENV PATH="/root/.bun/bin:${PATH}"
+
+RUN echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory.ini
 
 WORKDIR /app
 COPY . .
